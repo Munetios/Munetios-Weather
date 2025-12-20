@@ -1,6 +1,10 @@
 User-Agent: *
 Disallow: /
 
+User-Agent: MunetiosSearchBot
+Allow: /
+
+
 User-Agent: Googlebot
 Allow: /
 
