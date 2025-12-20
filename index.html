@@ -18,7 +18,10 @@
       }
     });
   </script>
-    <link rel="icon" href="https://www.munetios.com/apps/image copy 3.png" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="https://api.munetios.com/beautiful-css/beautiful.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@6..144,1..1000,90&amp;family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&amp;display=swap" rel="stylesheet">
@@ -231,7 +234,45 @@
 
     <div id="toast-container"></div>
 
-    <div class="main-container">
+    <div class="main-container"> 
+          <!-- Topbar -->
+        <header class="topbar p-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="sidebar-toggle-btn" class="sidebar-toggle-btn p-2 liquid-glass rounded-full hover:bg-[var(--tertiary-bg)] hidden">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <button id="menu-icon-btn-mobile" class="menu-icon-btn-mobile liquid-glass p-2 rounded-full hover:bg-[var(--tertiary-bg)] hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <div class="topbar-search-container relative liquid-glass w-full max-w-[850px]" style="max-width: 850px !important; min-width: 0 !important; width: 100% !important;">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-[var(--secondary-text)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                    </div>
+                    <input id="search-input" type="text" placeholder="Search for a city..." class="w-full liquid-glass border border-[var(--border-color)] text-[var(--primary-text)] rounded-full py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition-shadow">
+                    <div id="search-results" class="absolute mt-2 w-full liquid-glass rounded-lg shadow-lg z-20 hidden overflow-hidden border border-[var(--border-color)]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center liquid-glass gap-1">
+                <button id="search-icon-btn" class="search-icon-btn liquid-glass p-3 rounded-full hover:bg-[var(--tertiary-bg)] hidden">
+                    <svg class="h-6 w-6 text-[var(--primary-text)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                </button>
+                <button id="help-btn" class="p-3 rounded-full hover:bg-[var(--tertiary-bg)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </button>
+                <button id="settings-btn" class="p-3 rounded-full hover:bg-[var(--tertiary-bg)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </button>
+                <div class="relative">
+                    <button id="apps-btn" class="p-3 rounded-full hover:bg-[var(--tertiary-bg)] hidden sm:block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2z"/></svg>
+                    </button>
+                    <div id="apps-wrapper" style="width: 500px;" class="absolute right-0 mt-2 bg-[var(--primary-bg)] rounded-lg shadow-lg z-20 hidden border border-[var(--border-color)] p-2" aria-label="Munetios Apps Dropdown">
+                  <iframe src="https://www.munetios.com/apps" width="100%" height="700" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </header>
         <!-- Sidebar -->
         <aside id="sidebar" class="sidebar  liquid-glass p-4 flex flex-col h-full border-r border-[var(--border-color)] transition-all duration-300">
             <div class="sidebar-header flex items-center gap-3 mb-8 px-2">
@@ -253,44 +294,7 @@
         </aside>
         <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-        <!-- Topbar -->
-        <header class="topbar p-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <button id="sidebar-toggle-btn" class="sidebar-toggle-btn p-2 liquid-glass rounded-full hover:bg-[var(--tertiary-bg)] hidden">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </button>
-                <button id="menu-icon-btn-mobile" class="menu-icon-btn-mobile liquid-glass p-2 rounded-full hover:bg-[var(--tertiary-bg)] hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </button>
-                <div class="topbar-search-container relative liquid-glass w-full max-w-[850px]" style="max-width: 850px !important; min-width: 0 !important; width: 100% !important;">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-[var(--secondary-text)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
-                    </div>
-                    <input id="search-input" type="text" placeholder="Search for a city..." class="w-full liquid-glass border border-[var(--border-color)] text-[var(--primary-text)] rounded-full py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition-shadow">
-                    <div id="search-results" class="absolute mt-2 w-full liquid-glass rounded-lg shadow-lg z-20 hidden overflow-hidden border border-[var(--border-color)]"></div>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <button id="search-icon-btn" class="search-icon-btn liquid-glass p-3 rounded-full hover:bg-[var(--tertiary-bg)] hidden">
-                    <svg class="h-6 w-6 text-[var(--primary-text)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
-                </button>
-                <button id="help-btn" class="p-3 rounded-full hover:bg-[var(--tertiary-bg)] liquid-glass">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                </button>
-                <button id="settings-btn" class="p-3 rounded-full hover:bg-[var(--tertiary-bg)] liquid-glass">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                </button>
-                <div class="relative">
-                    <button id="apps-btn" class="p-3 rounded-full hover:bg-[var(--tertiary-bg)] hidden sm:block liquid-glass">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zm4-8h-2v-2h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2z"/></svg>
-                    </button>
-                    <div id="apps-wrapper" style="width: 500px;" class="absolute right-0 mt-2 bg-[var(--primary-bg)] rounded-lg shadow-lg z-20 hidden border border-[var(--border-color)] p-2" aria-label="Munetios Apps Dropdown">
-                  <iframe src="https://www.munetios.com/apps" width="100%" height="700" frameborder="0"></iframe>
-                    </div>
-                </div>
-            </div>
-        </header>
+     
 
         <!-- Main Content -->
         <main class="main-content p-6 overflow-y-auto">
@@ -380,10 +384,86 @@
         <p class="mb-4 text-[var(--secondary-text)]" data-translate="help_p2">
             Click the settings icon to change the theme, language, and temperature units. The apps icon provides quick links to other Munetios applications.
         </p>
+        <button id="compare-weather-btn" class="btn-rounded mt-2 w-full border border-[var(--accent-color)] text-[var(--accent-color)] font-semibold py-2 px-4 transition-colors hover:bg-[var(--accent-color)] hover:text-white" data-translate="compare_weather">Compare other weathers</button>
         <button id="weather-codes-btn" class="btn-rounded mt-2 w-full border border-[var(--accent-color)] text-[var(--accent-color)] font-semibold py-2 px-4 transition-colors hover:bg-[var(--accent-color)] hover:text-white" data-translate="weather_codes_list">Weather Codes List</button>
         <button id="close-help-modal" class="btn-rounded mt-4 w-full bg-[var(--accent-color)] hover:bg-[var(--accent-color-hover)] text-white font-semibold py-2 px-4 transition-colors" data-translate="got_it">Got it!</button>
     </div>
-
+    <!-- Compare other weathers Modal -->
+    <div id="compare-weather-modal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 liquid-glass p-8 rounded-lg shadow-lg z-[60] w-full max-w-3xl hidden">
+        <h2 class="text-2xl font-bold mb-4" data-translate="compare_weather">Compare Other Weathers</h2>
+        <p>Do More with Munetios Weather</p>
+        <table class="w-full text-left border-collapse mt-4">
+            <thead>
+                <tr>
+                    <th class="border-b border-[var(--border-color)] pb-2" data-translate="feature">Feature</th>
+                    <th class="border-b border-[var(--border-color)] pb-2">Munetios Weather</th>
+                    <th class="border-b border-[var(--border-color)] pb-2">The Weather Channel</th>
+                    <th class="border-b border-[var(--border-color)] pb-2">Google Weather</th>
+                    <th class="border-b border-[var(--border-color)] pb-2">Apple Weather</th>
+                    <th class="border-b border-[var(--border-color)] pb-2">AccuWeather</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="py-2 border-b border-[var(--border-color)]">Embed Weather</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                </tr>
+                <tr>
+                    <td class="py-2 border-b border-[var(--border-color)]">No Ads or Tracking</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                </tr>
+                <tr>
+                    <td class="py-2 border-b border-[var(--border-color)]">Daylight Savings &amp; Sun Times</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                </tr>
+                <tr>
+                    <td class="py-2 border-b border-[var(--border-color)]">Open Data Source</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">Open Meteo API only</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                </tr>
+                <tr>
+                    <td class="py-2 border-b border-[var(--border-color)]">Multi-language Support</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                </tr>
+                <tr>
+                    <td class="py-2 border-b border-[var(--border-color)]">Customizable Units</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                </tr>
+                <tr>
+                    <td class="py-2 border-b border-[var(--border-color)]">Free to Use</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">✔️</td>
+                    <td class="py-2 border-b border-[var(--border-color)] text-center">❌</td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="close-compare-modal" class="btn-rounded mt-6 w-full bg-[var(--accent-color)] hover:bg-[var(--accent-color-hover)] text-white font-semibold py-2 px-4 transition-colors" data-translate="close">Close</button>
+    </div>
     <!-- Weather Codes Modal -->
         <div id="weather-codes-modal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 liquid-glass p-8 rounded-lg shadow-lg z-[60] w-full max-w-2xl hidden">
             <h2 class="text-2xl font-bold mb-4" data-translate="weather_codes_list">Weather Codes List</h2>
@@ -530,6 +610,9 @@ document.addEventListener('DOMContentLoaded', () => {
         embedPreviewIframe: document.getElementById('embed-preview-iframe'),
         embedCodeTextarea: document.getElementById('embed-code-textarea'),
         copyEmbedCodeBtn: document.getElementById('copy-embed-code-btn'),
+        compareWeatherBtn: document.getElementById('compare-weather-btn'),
+        compareWeatherModal: document.getElementById('compare-weather-modal'),
+        closeCompareModal: document.getElementById('close-compare-modal'),
     };
 
     // --- TRANSLATIONS ---
@@ -547,6 +630,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Location added", location_removed: "Location removed", location_exists: "Location already saved", list_full: "Location list is full",
             getting_location: "Getting your location...", location_error: "Could not get location",
             embed_title: "Embed Weather", preview: "Preview", embed_code: "Embed Code", copy: "Copy", code_copied: "Code copied to clipboard!",
+            compare_weather: "Compare other weathers",
+            feature: "Feature",
         },
         es: {
             my_location: "Mi Ubicación", locations: "Ubicaciones", "16_day_forecast": "Pronóstico de 16 Días", today_forecast: "Pronóstico de Hoy",
@@ -561,6 +646,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Ubicación añadida", location_removed: "Ubicación eliminada", location_exists: "La ubicación ya está guardada", list_full: "La lista de ubicaciones está llena",
             getting_location: "Obteniendo tu ubicación...", location_error: "No se pudo obtener la ubicación",
             embed_title: "Insertar Clima", preview: "Vista Previa", embed_code: "Código de Inserción", copy: "Copiar", code_copied: "¡Código copiado al portapapeles!",
+            compare_weather: "Comparar otros climas",
+            feature: "Característica",
         },
         // Other languages...
         fr: {
@@ -576,6 +663,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Lieu ajouté", location_removed: "Lieu supprimé", location_exists: "Lieu déjà enregistré", list_full: "La liste des lieux est pleine",
             getting_location: "Obtention de votre position...", location_error: "Impossible d'obtenir la position",
             embed_title: "Intégrer la météo", preview: "Aperçu", embed_code: "Code d'intégration", copy: "Copier", code_copied: "Code copié dans le presse-papiers !",
+            compare_weather: "Comparer d'autres climats",
+            feature: "Caractéristique",
         },
         de: {
             my_location: "Mein Standort", locations: "Orte", "16_day_forecast": "16-Tage-Vorhersage", today_forecast: "Heutige Vorhersage",
@@ -590,6 +679,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Ort hinzugefügt", location_removed: "Ort entfernt", location_exists: "Ort bereits gespeichert", list_full: "Ortsliste ist voll",
             getting_location: "Standort wird ermittelt...", location_error: "Standort konnte nicht ermittelt werden",
             embed_title: "Wetter einbetten", preview: "Vorschau", embed_code: "Einbettungscode", copy: "Kopieren", code_copied: "Code in die Zwischenablage kopiert!",
+            compare_weather: "Andere Wetter vergleichen",
+            feature: "Funktion",
         },
         ru: {
             my_location: "Моё местоположение", locations: "Места", "16_day_forecast": "Прогноз на 16 дней", today_forecast: "Прогноз на сегодня",
@@ -604,6 +695,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Место добавлено", location_removed: "Место удалено", location_exists: "Место уже сохранено", list_full: "Список мест заполнен",
             getting_location: "Получение вашего местоположения...", location_error: "Не удалось получить местоположение",
             embed_title: "Встроить погоду", preview: "Предпросмотр", embed_code: "Код для вставки", copy: "Копировать", code_copied: "Код скопирован в буфер обмена!",
+            compare_weather: "Сравнить другую погоду",
+            feature: "Функция",
         },
         zh: {
             my_location: "我的位置", locations: "地点", "16_day_forecast": "16天预报", today_forecast: "今日预报",
@@ -618,6 +711,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "已添加地点", location_removed: "已移除地点", location_exists: "地点已保存", list_full: "地点列表已满",
             getting_location: "正在获取您的位置...", location_error: "无法获取位置",
             embed_title: "嵌入天气", preview: "预览", embed_code: "嵌入代码", copy: "复制", code_copied: "代码已复制到剪贴板！",
+            compare_weather: "比较其他天气",
+            feature: "特征",
         },
         ja: {
             my_location: "現在地", locations: "場所", "16_day_forecast": "16日間予報", today_forecast: "今日の予報",
@@ -632,6 +727,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "場所を追加しました", location_removed: "場所を削除しました", location_exists: "場所は既に保存されています", list_full: "場所リストがいっぱいです",
             getting_location: "現在地を取得中...", location_error: "現在地を取得できません",
             embed_title: "天気を埋め込む", preview: "プレビュー", embed_code: "埋め込みコード", copy: "コピー", code_copied: "コードをクリップボードにコピーしました！",
+            compare_weather: "他の天気を比較する",
+            feature: "特征",
         },
         ko: {
             my_location: "내 위치", locations: "위치", "16_day_forecast": "16일 예보", today_forecast: "오늘의 예보",
@@ -646,6 +743,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "위치가 추가되었습니다", location_removed: "위치가 삭제되었습니다", location_exists: "이미 저장된 위치입니다", list_full: "위치 목록이 가득 찼습니다",
             getting_location: "위치를 가져오는 중...", location_error: "위치를 가져올 수 없습니다",
             embed_title: "날씨 임베드", preview: "미리보기", embed_code: "임베드 코드", copy: "복사", code_copied: "코드가 클립보드에 복사되었습니다!",
+            compare_weather: "다른 날씨 비교하기",
+            feature: "기능",
         },
         pt: {
             my_location: "Minha localização", locations: "Locais", "16_day_forecast": "Previsão de 16 dias", today_forecast: "Previsão de hoje",
@@ -660,6 +759,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Local adicionado", location_removed: "Local removido", location_exists: "Local já salvo", list_full: "Lista de locais cheia",
             getting_location: "Obtendo sua localização...", location_error: "Não foi possível obter a localização",
             embed_title: "Incorporar Clima", preview: "Visualização", embed_code: "Código de Incorporação", copy: "Copiar", code_copied: "Código copiado para a área de transferência!",
+            compare_weather: "Comparar outros climas",
+            feature: "Característica",
         },
         it: {
             my_location: "La mia posizione", locations: "Luoghi", "16_day_forecast": "Previsioni 16 giorni", today_forecast: "Previsioni di oggi",
@@ -674,6 +775,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Luogo aggiunto", location_removed: "Luogo rimosso", location_exists: "Luogo già salvato", list_full: "Elenco luoghi pieno",
             getting_location: "Ottenimento posizione...", location_error: "Impossibile ottenere la posizione",
             embed_title: "Incorpora Meteo", preview: "Anteprima", embed_code: "Codice da Incorporare", copy: "Copia", code_copied: "Codice copiato negli appunti!",
+            compare_weather: "Confronta altri climi",
+            feature: "Característica",
         },
         hi: {
             my_location: "मेरा स्थान", locations: "स्थान", "16_day_forecast": "16-दिन पूर्वानुमान", today_forecast: "आज का पूर्वानुमान",
@@ -688,6 +791,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "स्थान जोड़ा गया", location_removed: "स्थान हटाया गया", location_exists: "स्थान पहले से सहेजा गया है", list_full: "स्थान सूची पूरी है",
             getting_location: "आपका स्थान प्राप्त किया जा रहा है...", location_error: "स्थान प्राप्त नहीं कर सके",
             embed_title: "मौसम एम्बेड करें", preview: "पूर्वावलोकन", embed_code: "एम्बेड कोड", copy: "कॉपी", code_copied: "कोड क्लिपबोर्ड पर कॉपी किया गया!",
+            compare_weather: "अन्य मौसम की तुलना करें",
+            feature: "विशेषता",
         },
         id: {
             my_location: "Lokasi Saya", locations: "Lokasi", "16_day_forecast": "Prakiraan 16 Hari", today_forecast: "Prakiraan Hari Ini",
@@ -702,8 +807,20 @@ document.addEventListener('DOMContentLoaded', () => {
             location_added: "Lokasi ditambahkan", location_removed: "Lokasi dihapus", location_exists: "Lokasi sudah tersimpan", list_full: "Daftar lokasi penuh",
             getting_location: "Mengambil lokasi Anda...", location_error: "Tidak dapat mengambil lokasi",
             embed_title: "Sematkan Cuaca", preview: "Pratinjau", embed_code: "Kode Sematan", copy: "Salin", code_copied: "Kode disalin ke papan klip!",
+            compare_weather: "Bandingkan cuaca lain",
+            feature: "Fitur",
         },
     };
+    // --- Compare Weather Modal ---
+    function closeCompareModal() {
+        dom.compareWeatherModal.classList.add('hidden');
+        dom.modalOverlay.classList.add('hidden');
+    }
+    dom.compareWeatherBtn.addEventListener('click', () => {
+        closeModal(); // Reset modal content
+        openModal(dom.compareWeatherModal);
+    });
+    dom.closeCompareModal.addEventListener('click', closeCompareModal);
 
     // --- WEATHER CODES & ICONS ---
     const weatherDescriptions = {
@@ -717,7 +834,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const weatherIcons = {
         0: `<svg viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
         1: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9.5a7 7 0 0 1 0-14h8a5 5 0 0 1 4.5 5.24"></path><line x1="12" y1="1" x2="12" y2="3"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="1" y1="12" x2="3" y2="12"></line></svg>`,
-        2: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9.5a7 7 0 0 1 0-14h8a5 5 0 0 1 4.5 5.24"></path><path d="M3 12h1"></path></svg>`,
+        2: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5" fill="#FFD700" stroke="orange"/><path d="M17 17a4 4 0 1 0-8 0" fill="#B0C4DE" stroke="#B0C4DE"/><path d="M17 17H19a2 2 0 0 0 0-4h-1" fill="none" stroke="#B0C4DE"/></svg>`,
         3: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9.5a7 7 0 1 1 6.71-9h1.79a5 5 0 0 1 0 10z"></path><path d="M16 19-2 19"></path></svg>`,
         45: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.5a2.5 2.5 0 0 0-5 0"></path><path d="M16 22h-2m-2 0h-2m-2 0H8"></path><path d="M17.5 19H9.5a7 7 0 1 1 6.71-9h1.79a5 5 0 0 1 0 10z"></path></svg>`,
         48: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.5a2.5 2.5 0 0 0-5 0"></path><path d="M16 22h-2m-2 0h-2m-2 0H8"></path><path d="M17.5 19H9.5a7 7 0 1 1 6.71-9h1.79a5 5 0 0 1 0 10z"></path><path d="M10 19l-2 2"></path><path d="M14 19l-2 2"></path></svg>`,
@@ -754,116 +871,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const endDate = today.toISOString().split('T')[0];
         const startDate = new Date(new Date().setFullYear(today.getFullYear() - 1)).toISOString().split('T')[0];
         const archiveApiUrl = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${startDate}&end_date=${endDate}&daily=sunrise,sunset&timezone=auto`;
-    // --- RATE LIMITING & CAPTCHA ---
-    // Simple in-memory rate limiter (per reload, not persistent)
-    if (!window._weatherRateLimit) {
-        window._weatherRateLimit = { count: 0, lastReset: Date.now(), captchaRequired: false };
-    }
-    const RATE_LIMIT = 20;
-    const RATE_WINDOW = 60 * 1000; // 1 minute
-
-    // Reset counter if window passed
-    if (Date.now() - window._weatherRateLimit.lastReset > RATE_WINDOW) {
-        window._weatherRateLimit.count = 0;
-        window._weatherRateLimit.lastReset = Date.now();
-        window._weatherRateLimit.captchaRequired = false;
-    }
-
-    // If CAPTCHA required, show modal and wait for solve
-    if (window._weatherRateLimit.captchaRequired) {
-        await showCustomCaptcha();
-    }
-
-    // Increment and check limit
-    window._weatherRateLimit.count++;
-    if (window._weatherRateLimit.count > RATE_LIMIT) {
-        window._weatherRateLimit.captchaRequired = true;
-        await showCustomCaptcha();
-        window._weatherRateLimit.count = 1;
-        window._weatherRateLimit.lastReset = Date.now();
-    }
-
-    // --- Custom CAPTCHA Modal ---
-    async function showCustomCaptcha() {
-        return new Promise((resolve) => {
-        // If modal already exists, just show it
-        let captchaModal = document.getElementById('custom-captcha-modal');
-        if (!captchaModal) {
-            captchaModal = document.createElement('div');
-            captchaModal.id = 'custom-captcha-modal';
-            captchaModal.style.position = 'fixed';
-            captchaModal.style.top = '0';
-            captchaModal.style.left = '0';
-            captchaModal.style.width = '100vw';
-            captchaModal.style.height = '100vh';
-            captchaModal.style.background = 'rgba(0,0,0,0.5)';
-            captchaModal.style.zIndex = '9999';
-            captchaModal.innerHTML = `
-            <div style="background: var(--primary-bg); color: var(--primary-text); max-width: 350px; margin: 10vh auto; padding: 2rem; border-radius: 1rem; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center;">
-                <h2 style="font-size:1.5rem; margin-bottom:1rem;">Are you human?</h2>
-                <div id="captcha-question" style="font-size:1.2rem; margin-bottom:1rem;"></div>
-                <input id="captcha-answer" type="text" style="padding:0.5rem; border-radius:0.5rem; border:1px solid var(--border-color); color: var(--primary-text); width:80%; margin-bottom:1rem;" autocomplete="off" />
-                <div>
-                <button id="captcha-submit" style="background: var(--accent-color); color: #fff; border:none; border-radius:0.5rem; padding:0.5rem 1.5rem; font-weight:bold; cursor:pointer;">Submit</button>
-                </div>
-                <div id="captcha-error" style="color:red; margin-top:0.5rem; min-height:1.5em;"></div>
-            </div>
-            `;
-            document.body.appendChild(captchaModal);
-        } else {
-            captchaModal.style.display = 'block';
-        }
-        // Detect unknown browsers (simple check)
-        const knownBrowsers = [
-            /chrome/i, /firefox/i, /safari/i, /edg/i, /opera/i, /opr\//i, /crios/i, /fxios/i, /samsungbrowser/i, /ucbrowser/i, /brave/i
-        ];
-        const ua = navigator.userAgent;
-        const isKnown = knownBrowsers.some(rx => rx.test(ua));
-        if (!isKnown) {
-            captchaModal.querySelector('#captcha-question').textContent = "Please complete this CAPTCHA to continue.";
-        }
-        // Generate simple math question
-        const a = Math.floor(Math.random() * 10) + 1;
-        const b = Math.floor(Math.random() * 10) + 1;
-        const op = ['+', '-', '*'][Math.floor(Math.random() * 3)];
-        let answer;
-        let question;
-        if (op === '+') {
-            answer = a + b;
-            question = `What is ${a} + ${b}?`;
-        } else if (op === '-') {
-            answer = a - b;
-            question = `What is ${a} - ${b}?`;
-        } else {
-            answer = a * b;
-            question = `What is ${a} × ${b}?`;
-        }
-        captchaModal.querySelector('#captcha-question').textContent = question;
-        captchaModal.querySelector('#captcha-answer').value = '';
-        captchaModal.querySelector('#captcha-error').textContent = '';
-
-        // Focus input
-        setTimeout(() => captchaModal.querySelector('#captcha-answer').focus(), 100);
-
-        // Handler
-        function submitHandler() {
-            const userAnswer = captchaModal.querySelector('#captcha-answer').value.trim();
-            if (parseInt(userAnswer, 10) === answer) {
-            captchaModal.style.display = 'none';
-            window._weatherRateLimit.captchaRequired = false;
-            resolve();
-            } else {
-            captchaModal.querySelector('#captcha-error').textContent = 'Incorrect, try again!';
-            captchaModal.querySelector('#captcha-answer').value = '';
-            captchaModal.querySelector('#captcha-answer').focus();
-            }
-        }
-        captchaModal.querySelector('#captcha-submit').onclick = submitHandler;
-        captchaModal.querySelector('#captcha-answer').onkeydown = (e) => {
-            if (e.key === 'Enter') submitHandler();
-        };
-        });
-    }
         try {
             const [forecastResponse, archiveResponse] = await Promise.all([
                 fetch(forecastApiUrl),
@@ -1033,15 +1040,25 @@ document.addEventListener('DOMContentLoaded', () => {
             monthlyData[month].sunset.push(new Date(archive.daily.sunset[index]).getTime());
         });
 
+        // Get the timezone offset in minutes for the location (from API if available, fallback to browser)
+        let locationTimezoneOffsetMinutes = 0;
+        if (archive && archive.utc_offset_minutes !== undefined) {
+            locationTimezoneOffsetMinutes = archive.utc_offset_minutes;
+        } else if (state.currentWeatherData && state.currentWeatherData.utc_offset_minutes !== undefined) {
+            locationTimezoneOffsetMinutes = state.currentWeatherData.utc_offset_minutes;
+        } else {
+            locationTimezoneOffsetMinutes = -new Date().getTimezoneOffset(); // fallback to browser
+        }
+
         const monthlyHtml = Array.from({length: 12}, (_, i) => {
             const monthName = new Date(Date.UTC(2000, i, 1)).toLocaleDateString(state.settings.language, {month: 'short'});
             if (!monthlyData[i]) return '';
-            // Calculate average in UTC, then convert to local time for display
+            // Calculate average in UTC
             const avgSunriseUTC = new Date(monthlyData[i].sunrise.reduce((a, b) => a + b, 0) / monthlyData[i].sunrise.length);
             const avgSunsetUTC = new Date(monthlyData[i].sunset.reduce((a, b) => a + b, 0) / monthlyData[i].sunset.length);
-            // Convert UTC to local time string for display
-            const avgSunriseLocal = new Date(avgSunriseUTC.getTime() + (new Date().getTimezoneOffset() * -60000));
-            const avgSunsetLocal = new Date(avgSunsetUTC.getTime() + (new Date().getTimezoneOffset() * -60000));
+            // Convert UTC to local time for the location using the location's offset
+            const avgSunriseLocal = new Date(avgSunriseUTC.getTime() + locationTimezoneOffsetMinutes * 60000);
+            const avgSunsetLocal = new Date(avgSunsetUTC.getTime() + locationTimezoneOffsetMinutes * 60000);
             return `
                 <div class="flex justify-between items-center text-sm py-2 border-b border-[var(--border-color)]">
                     <span class="font-semibold">${monthName}</span>
@@ -1576,6 +1593,491 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+/* --- Rate Limiting & CAPTCHA for Open-Meteo API --- */
+(function() {
+    // --- Rate Limiting ---
+    const RATE_LIMIT = 30; // requests
+    const RATE_WINDOW_MS = 5 * 60 * 1000; // 5 minutes
+    const STORAGE_KEY = 'munetios_weather_rate';
+    const CAPTCHA_KEY = 'munetios_weather_captcha_passed';
+
+    // Helper: get current timestamp
+    function now() {
+        return Date.now();
+    }
+
+    // Helper: get rate data from sessionStorage
+    function getRateData() {
+        try {
+            let data = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
+            if (!Array.isArray(data.timestamps)) data.timestamps = [];
+            return data;
+        } catch (e) {
+            return { timestamps: [] };
+        }
+    }
+
+    // Helper: set rate data
+    function setRateData(data) {
+        try {
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (e) {}
+    }
+
+    // Helper: check if captcha is passed
+    function isCaptchaPassed() {
+        try {
+            let v = sessionStorage.getItem(CAPTCHA_KEY);
+            if (!v) return false;
+            let obj = JSON.parse(v);
+            // Only valid for 1 minutes
+            return obj && obj.passed && now() - obj.time < 1 * 60 * 1000;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // Helper: mark captcha as passed
+    function markCaptchaPassed() {
+        try {
+            sessionStorage.setItem(CAPTCHA_KEY, JSON.stringify({ passed: true, time: now() }));
+        } catch (e) {}
+    }
+
+    // Helper: clear captcha
+    function clearCaptchaPassed() {
+        try {
+            sessionStorage.removeItem(CAPTCHA_KEY);
+        } catch (e) {}
+    }
+
+    // --- CAPTCHA UI ---
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function showWeatherCaptcha429() {
+        document.getElementById('weatherCaptcha429Modal')?.remove();
+        const quizzes = [
+            {
+                question: 'What is the color of the sky on a clear day?',
+                options: ['Blue', 'Green', 'Red', 'Yellow'],
+                answer: 'Blue'
+            },
+            {
+                question: 'Which planet is known as the Red Planet?',
+                options: ['Earth', 'Mars', 'Jupiter', 'Venus'],
+                answer: 'Mars'
+            },
+            {
+                question: 'What do we call frozen water?',
+                options: ['Steam', 'Ice', 'Rain', 'Fog'],
+                answer: 'Ice'
+            },
+            {
+                question: 'Which gas do plants absorb from the atmosphere?',
+                options: ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Hydrogen'],
+                answer: 'Carbon Dioxide'
+            },
+            {
+                question: 'What instrument is used to measure temperature?',
+                options: ['Barometer', 'Thermometer', 'Hygrometer', 'Anemometer'],
+                answer: 'Thermometer'
+            },
+            {
+                question: 'Which company developed the JavaScript programming language?',
+                options: ['Netscape', 'Microsoft', 'Apple', 'IBM'],
+                answer: 'Netscape'
+            },
+            {
+                question: 'What does HTML stand for?',
+                options: ['HyperText Markup Language', 'Home Tool Markup Language', 'Hyperlinks and Text Markup Language', 'HighText Machine Language'],
+                answer: 'HyperText Markup Language'
+            },
+            {
+                question: 'Which of these is a version control system?',
+                options: ['Git', 'Photoshop', 'Excel', 'Chrome'],
+                answer: 'Git'
+            },
+            {
+                question: 'What is the main language used for styling web pages?',
+                options: ['CSS', 'Python', 'C++', 'SQL'],
+                answer: 'CSS'
+            },
+            {
+                question: 'Which company created the Windows operating system?',
+                options: ['Microsoft', 'Apple', 'Google', 'Amazon'],
+                answer: 'Microsoft'
+            },
+            {
+                question: 'What does API stand for?',
+                options: ['Application Programming Interface', 'Advanced Program Internet', 'Applied Programming Input', 'Automated Process Integration'],
+                answer: 'Application Programming Interface'
+            },
+            {
+                question: 'Which language is primarily used for Android app development?',
+                options: ['Java', 'Swift', 'Ruby', 'PHP'],
+                answer: 'Java'
+            },
+            {
+                question: 'What is the name of the package manager for Node.js?',
+                options: ['npm', 'pip', 'gem', 'composer'],
+                answer: 'npm'
+            },
+            {
+                question: 'Which protocol is used for secure web browsing?',
+                options: ['HTTPS', 'FTP', 'SMTP', 'SSH'],
+                answer: 'HTTPS'
+            },
+            {
+                question: 'What does SQL stand for?',
+                options: ['Structured Query Language', 'Simple Query Language', 'Sequential Query Language', 'Standard Question Language'],
+                answer: 'Structured Query Language'
+            },
+            {
+                question: 'Which of these is a NoSQL database?',
+                options: ['MongoDB', 'MySQL', 'PostgreSQL', 'Oracle'],
+                answer: 'MongoDB'
+            },
+            {
+                question: 'Which company owns the GitHub platform?',
+                options: ['Microsoft', 'Google', 'Facebook', 'Amazon'],
+                answer: 'Microsoft'
+            },
+            {
+                question: 'What is the main language used for iOS app development?',
+                options: ['Swift', 'Kotlin', 'Java', 'C#'],
+                answer: 'Swift'
+            },
+            {
+                question: 'Which of these is a JavaScript framework?',
+                options: ['React', 'Laravel', 'Django', 'Rails'],
+                answer: 'React'
+            },
+            {
+                question: 'What does CSS stand for?',
+                options: ['Cascading Style Sheets', 'Computer Style Sheets', 'Creative Style System', 'Colorful Style Sheets'],
+                answer: 'Cascading Style Sheets'
+            },
+            {
+                question: 'Which tool is used for containerization?',
+                options: ['Docker', 'Photoshop', 'Slack', 'Excel'],
+                answer: 'Docker'
+            },
+            {
+                question: 'Which company created the Chrome browser?',
+                options: ['Google', 'Microsoft', 'Mozilla', 'Apple'],
+                answer: 'Google'
+            },
+            {
+                question: 'What is the default port for HTTP?',
+                options: ['80', '443', '21', '25'],
+                answer: '80'
+            },
+            {
+                question: 'Which of these is a cloud computing platform?',
+                options: ['AWS', 'WordPress', 'Photoshop', 'Notepad'],
+                answer: 'AWS'
+            },
+            {
+                question: 'Which language is used for writing smart contracts on Ethereum?',
+                options: ['Solidity', 'Python', 'Java', 'C++'],
+                answer: 'Solidity'
+            },
+            {
+                question: 'What does IDE stand for in software development?',
+                options: ['Integrated Development Environment', 'Internet Data Exchange', 'Internal Device Emulator', 'Instant Data Engine'],
+                answer: 'Integrated Development Environment'
+            },
+            {
+                question: 'Which of these is a Linux distribution?',
+                options: ['Ubuntu', 'Windows', 'macOS', 'DOS'],
+                answer: 'Ubuntu'
+            },
+            {
+                question: 'What is the main markup language for creating web pages?',
+                options: ['HTML', 'Python', 'C++', 'Java'],
+                answer: 'HTML'
+            },
+            {
+                question: 'Which of these is a popular code editor?',
+                options: ['VS Code', 'Excel', 'PowerPoint', 'Paint'],
+                answer: 'VS Code'
+            },
+            {
+                question: 'Which company created the Python programming language?',
+                options: ['None of these', 'Microsoft', 'Apple', 'Google'],
+                answer: 'None of these'
+            },
+            {
+                question: 'What is the search engine that is made by Munetios?',
+                options: ['Munetios Search', 'Google', 'Bing', 'DuckDuckGo'],
+                answer: 'Munetios Search'
+            },
+            {
+                question: 'Which markup language is used for creating user interfaces in React?',
+                options: ['JSX', 'HTML', 'XML', 'Markdown'],
+                answer: 'JSX'
+            },
+            {
+                question: 'What does DOM stand for in web development?',
+                options: ['Document Object Model', 'Data Object Model', 'Digital Output Module', 'Dynamic Object Method'],
+                answer: 'Document Object Model'
+            },
+            {
+                question: 'Which HTTP status code means "Not Found"?',
+                options: ['404', '200', '500', '301'],
+                answer: '404'
+            },
+            {
+                question: 'Which of these is a JavaScript package manager?',
+                options: ['npm', 'apt', 'yum', 'brew'],
+                answer: 'npm'
+            },
+            {
+                question: 'What is the extension for a JavaScript file?',
+                options: ['.js', '.java', '.py', '.css'],
+                answer: '.js'
+            },
+            {
+                question: 'Which HTML tag is used to display an image?',
+                options: ['<img>', '<image>', '<src>', '<pic>'],
+                answer: '<img>'
+            },
+            {
+                question: 'Which CSS property changes the text color?',
+                options: ['color', 'background', 'font-size', 'border'],
+                answer: 'color'
+            },
+            {
+                question: 'What does JSON stand for?',
+                options: ['JavaScript Object Notation', 'Java Source Object Notation', 'JavaScript Output Name', 'Java Syntax Object Notation'],
+                answer: 'JavaScript Object Notation'
+            },
+            {
+                question: 'Which of these is a frontend JavaScript framework?',
+                options: ['Vue.js', 'Django', 'Flask', 'Laravel'],
+                answer: 'Vue.js'
+            },
+            {
+                question: 'Which HTML attribute specifies an alternate text for an image?',
+                options: ['alt', 'title', 'src', 'href'],
+                answer: 'alt'
+            },
+            {
+                question: 'Which season is typically the coldest in most countries?',
+                options: ['Winter', 'Summer', 'Spring', 'Autumn'],
+                answer: 'Winter'
+            },
+            {
+                question: 'What do you usually carry when it rains?',
+                options: ['Umbrella', 'Book', 'Spoon', 'Pillow'],
+                answer: 'Umbrella'
+            },
+            {
+                question: 'What do you wear on your feet when it is cold?',
+                options: ['Socks', 'Gloves', 'Hat', 'Shorts'],
+                answer: 'Socks'
+            },
+            {
+                question: 'What do you drink when you are thirsty?',
+                options: ['Water', 'Sand', 'Paper', 'Stone'],
+                answer: 'Water'
+            },
+            {
+                question: 'Which of these is a fruit?',
+                options: ['Apple', 'Chair', 'Car', 'Shoe'],
+                answer: 'Apple'
+            },
+            {
+                question: 'What color is a banana?',
+                options: ['Yellow', 'Blue', 'Black', 'Red'],
+                answer: 'Yellow'
+            },
+            {
+                question: 'Which animal barks?',
+                options: ['Dog', 'Cat', 'Fish', 'Cow'],
+                answer: 'Dog'
+            },
+            {
+                question: 'What do you use to write on paper?',
+                options: ['Pen', 'Fork', 'Shoe', 'Plate'],
+                answer: 'Pen'
+            },
+            {
+                question: 'Which of these is used to tell time?',
+                options: ['Clock', 'Spoon', 'Ball', 'Shoe'],
+                answer: 'Clock'
+            },
+            {
+                question: 'What do you use to call someone?',
+                options: ['Phone', 'Spoon', 'Book', 'Shoe'],
+                answer: 'Phone'
+            }
+        ];
+        let quizCount = Math.random() < 0.5 ? 2 : 3;
+        let quizPool = shuffle([...quizzes]);
+        let selected = quizPool.slice(0, quizCount);
+        selected = shuffle(selected);
+        let quizHtml = selected.map((q, i) => {
+            let shuffledOpts = shuffle([...q.options]);
+            let inputName = 'quiz' + i + '_' + Math.random().toString(36).slice(2, 8);
+            q._inputName = inputName;
+            q._shuffledOpts = shuffledOpts;
+            return `
+            <div style="margin-bottom:18px;">
+                <div style="font-weight:600;margin-bottom:6px;">${i+1}. ${q.question}</div>
+                <div>
+                ${shuffledOpts.map(opt => `
+                    <label style="display:inline-block;margin-right:16px;cursor:pointer;">
+                    <input type="radio" name="${inputName}" value="${opt}" style="margin-right:4px;">
+                    ${opt}
+                    </label>
+                `).join('')}
+                </div>
+            </div>
+            `;
+        }).join('');
+        let modal = document.createElement('div');
+        modal.id = 'weatherCaptcha429Modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.4)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '10010';
+        modal.innerHTML = `
+            <div class="liquid-glass" style="color:#222;padding:32px 36px;border-radius:18px;min-width:340px;max-width:95vw;box-shadow:0 4px 32px #0002;position:relative;">
+            <div style="font-size:2em;font-weight:700;color:#a259f7;text-align:center;margin-bottom:8px;">429</div>
+            <div style="font-size:1.2em;font-weight:600;text-align:center;margin-bottom:18px;">Woah you're going too fast.</div>
+            <div style="color:#a259f7;font-weight:500;text-align:center;margin-bottom:18px;">Are you a human? Please solve the quiz below to continue</div>
+            <form id="weatherQuizCaptchaForm">
+                ${quizHtml}
+                <button type="submit" class="btn liquid-glass" id="weatherQuizCaptchaSubmit" style="background:#6c2eb7;color:#fff;width:100%;margin-top:8px;" disabled>Submit</button>
+            </form>
+            <div id="weatherQuizCaptchaError" style="color:#e66;font-weight:500;margin-top:10px;display:none;text-align:center;"></div>
+            <div id="weatherQuizCaptchaTimer" style="color:#888;font-size:0.95em;text-align:center;margin-top:8px;">Please wait...</div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+
+        let submitBtn = modal.querySelector('#weatherQuizCaptchaSubmit');
+        let timerDiv = modal.querySelector('#weatherQuizCaptchaTimer');
+        let delay = 3000 + Math.floor(Math.random() * 2000);
+        let endTime = Date.now() + delay;
+        let timer = setInterval(() => {
+            let left = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+            timerDiv.textContent = left > 0 ? `Please wait ${left} second${left === 1 ? '' : 's'}...` : '';
+            if (left <= 0) {
+                clearInterval(timer);
+                submitBtn.disabled = false;
+                timerDiv.textContent = '';
+            }
+        }, 250);
+
+        function checkAllAnswered() {
+            let allAnswered = selected.every(q => {
+                return !!modal.querySelector(`input[name="${q._inputName}"]:checked`);
+            });
+            if (allAnswered && submitBtn.disabled === false) {
+                submitBtn.classList.remove('disabled');
+            } else {
+                submitBtn.classList.add('disabled');
+            }
+        }
+        modal.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', checkAllAnswered);
+        });
+
+        modal.querySelector('#weatherQuizCaptchaForm').onsubmit = function(ev) {
+            ev.preventDefault();
+            if (submitBtn.disabled) return;
+            let allCorrect = true;
+            for (let i = 0; i < selected.length; ++i) {
+                let q = selected[i];
+                let radios = modal.querySelectorAll(`input[name="${q._inputName}"]`);
+                let checked = Array.from(radios).find(r => r.checked);
+                if (!checked || checked.value !== q.answer) {
+                    allCorrect = false;
+                }
+            }
+            if (allCorrect) {
+                markCaptchaPassed();
+                modal.remove();
+                document.body.style.overflow = '';
+                if (typeof showToast === 'function') showToast('CAPTCHA passed. You may continue searching.');
+            } else {
+                let err = modal.querySelector('#weatherQuizCaptchaError');
+                err.textContent = 'Incorrect answer(s). Please try again.';
+                err.style.display = 'block';
+            }
+        };
+
+        window.addEventListener('beforeunload', () => modal.remove());
+    }
+
+    // --- Patch Open-Meteo API calls ---
+    // Patch fetch for Open-Meteo endpoints
+    const origFetch = window.fetch;
+    window.fetch = async function(resource, options) {
+        let url = typeof resource === 'string' ? resource : (resource?.url || '');
+        // Only rate limit Open-Meteo API (forecast, archive, geocoding)
+        if (
+            /open-meteo\.com\/v1\/(forecast|archive)/.test(url) ||
+            /geocoding-api\.open-meteo\.com/.test(url)
+        ) {
+            // If captcha not passed, check rate limit
+            if (!isCaptchaPassed()) {
+                let data = getRateData();
+                let nowTs = now();
+                data.timestamps = data.timestamps.filter(ts => nowTs - ts < RATE_WINDOW_MS);
+                if (data.timestamps.length >= RATE_LIMIT) {
+                    showWeatherCaptcha429();
+                    // Block request until captcha solved
+                    throw new Error('429 Too Many Requests');
+                }
+                data.timestamps.push(nowTs);
+                setRateData(data);
+            } else {
+                let data = getRateData();
+                let nowTs = now();
+                data.timestamps = data.timestamps.filter(ts => nowTs - ts < RATE_WINDOW_MS);
+                data.timestamps.push(nowTs);
+                setRateData(data);
+            }
+        }
+        return origFetch.apply(this, arguments);
+    };
+
+    // Block search/enter if captcha modal is open
+    document.addEventListener('keydown', function(e) {
+        if (document.getElementById('weatherCaptcha429Modal')) {
+            if (e.key === 'Enter') e.preventDefault();
+        }
+    }, true);
+
+    window.addEventListener('beforeunload', function() {
+        document.body.style.overflow = '';
+    });
+
+    setInterval(() => {
+        if (isCaptchaPassed()) {
+            let obj = JSON.parse(sessionStorage.getItem(CAPTCHA_KEY));
+            if (!obj || now() - obj.time > 10 * 60 * 1000) {
+                clearCaptchaPassed();
+            }
+        }
+    }, 60 * 1000);
+})();
 </script>
 </body>
 </html>
