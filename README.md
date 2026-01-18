@@ -1,3 +1,8 @@
 # Munetios-Weather
 Our weather app that API uses Open-Meteo. Some weather data could be wrong.
 Important: Don't go too quick or you likely get 429 too many requests.
+
+## License
+
+- Source code: Munetios License v1.2 (see LICENSE)
+- Weather data: Open-Meteo (CC BY-NC 4.0) — see NOTICE
