@@ -5,4 +5,4 @@ Important: Don't go too quick or you likely get 429 too many requests.
 ## License
 
 - Source code: Munetios License v1.2 (see LICENSE)
-- Weather data: Open-Meteo (CC BY-NC 4.0) — see NOTICE
+- Weather data: Open-Meteo (CC BY 4.0) — see NOTICE
