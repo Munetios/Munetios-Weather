@@ -8,6 +8,8 @@
       content="Munetios Weather: A feature-rich, responsive weather application providing detailed forecasts, and daylight information."
     />
     <title>Munetios Weather</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline'; style-src 'self' https://api.munetios.com https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.open-meteo.com https://archive-api.open-meteo.com https://geocoding-api.open-meteo.com https://nominatim.openstreetmap.org https://www.munetios.com; frame-src https://www.munetios.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
@@ -174,6 +176,39 @@
       .sidebar-overlay.open {
         display: block;
         opacity: 1;
+      }
+
+      /* Loading Spinner */
+      #loading-spinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+      }
+      #loading-spinner.show {
+        display: flex;
+      }
+      .spinner-circle {
+        width: 60px;
+        height: 60px;
+        border: 4px solid var(--border-color);
+        border-top: 4px solid var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
       /* Embed Button */
@@ -628,6 +663,11 @@
           <a href="https://www.munetios.com/policies/#/privacy">Privacy</a>
         </p>
       </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner">
+      <div class="spinner-circle"></div>
     </div>
 
     <!-- Mobile Search Bar -->
@@ -2311,7 +2351,11 @@
           }
           state.currentLocation = location;
           saveState();
+          // Show loading spinner
+          document.getElementById("loading-spinner").classList.add("show");
           const weatherData = await getWeatherData(location.lat, location.lon);
+          // Hide loading spinner
+          document.getElementById("loading-spinner").classList.remove("show");
           if (weatherData) {
             updateUI(weatherData);
           }
@@ -2328,6 +2372,8 @@
             return;
           }
           showToast(translate("getting_location"), "info");
+          // Show loading spinner
+          document.getElementById("loading-spinner").classList.add("show");
           navigator.geolocation.getCurrentPosition(
             async (position) => {
               const { latitude, longitude } = position.coords;
@@ -2347,10 +2393,18 @@
                 };
                 selectLocation(location);
               } catch (error) {
+                // Hide loading spinner on error
+                document
+                  .getElementById("loading-spinner")
+                  .classList.remove("show");
                 showToast(translate("location_error"), "error");
               }
             },
             () => {
+              // Hide loading spinner on error
+              document
+                .getElementById("loading-spinner")
+                .classList.remove("show");
               showToast(translate("location_error"), "error");
             },
           );
